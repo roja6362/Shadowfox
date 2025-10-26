@@ -1,0 +1,72 @@
+import pandas as pd
+
+# -----------------------------
+# Step 1: Sample Fielding Dataset
+# -----------------------------
+data = [
+    # Match, Innings, Team, Player, Ballcount, Position, Short Description, Pick, Throw, Runs, Overcount, Venue
+    (1, 1, "India", "Ravindra Jadeja", 3, "Point", "Clean pick and sharp throw", "clean pick", "run out", 2, 2, "Wankhede"),
+    (1, 1, "India", "Ravindra Jadeja", 4, "Point", "Fumble at point", "fumble", "missed run out", -1, 5, "Wankhede"),
+    (1, 1, "India", "Virat Kohli", 2, "Long-on", "Saved boundary with dive", "clean pick", "good throw", 3, 8, "Wankhede"),
+    (1, 1, "India", "Virat Kohli", 6, "Long-on", "Dropped catch near boundary", "drop catch", "", -4, 10, "Wankhede"),
+    (1, 1, "India", "Suryakumar Yadav", 1, "Covers", "Brilliant catch", "catch", "", 5, 12, "Wankhede"),
+    (1, 1, "India", "Suryakumar Yadav", 5, "Covers", "Direct hit missed", "clean pick", "missed run out", -2, 14, "Wankhede"),
+]
+
+columns = ["Match No.", "Innings", "Team", "Player Name", "Ballcount", "Position",
+           "Short Description", "Pick", "Throw", "Runs", "Overcount", "Venue"]
+
+df = pd.DataFrame(data, columns=columns)
+
+# -----------------------------
+# Step 2: Define Weights for Formula
+# -----------------------------
+weights = {
+    "WCP": 1,     # Clean Pick
+    "WGT": 2,     # Good Throw
+    "WC": 10,     # Catch
+    "WDC": -5,    # Dropped Catch (negative impact)
+    "WST": 15,    # Stumping
+    "WRO": 12,    # Run Out
+    "WMRO": -3,   # Missed Run Out
+    "WDH": 8      # Direct Hit
+}
+
+# -----------------------------
+# Step 3: Function to Calculate Performance Score
+# -----------------------------
+def calculate_performance(player_df):
+    CP = sum(player_df["Pick"] == "clean pick")
+    GT = sum(player_df["Pick"] == "good throw")
+    C = sum(player_df["Pick"] == "catch")
+    DC = sum(player_df["Pick"] == "drop catch")
+    ST = sum(player_df["Throw"] == "stumping")
+    RO = sum(player_df["Throw"] == "run out")
+    MRO = sum(player_df["Throw"] == "missed run out")
+    DH = sum(player_df["Short Description"].str.contains("Direct hit", case=False))
+    RS = player_df["Runs"].sum()
+
+    PS = (CP*weights["WCP"] + GT*weights["WGT"] + C*weights["WC"] + 
+          DC*weights["WDC"] + ST*weights["WST"] + RO*weights["WRO"] + 
+          MRO*weights["WMRO"] + DH*weights["WDH"] + RS)
+    return PS
+
+# -----------------------------
+# Step 4: Apply Calculation to Each Player
+# -----------------------------
+performance_matrix = []
+
+for player in df["Player Name"].unique():
+    player_df = df[df["Player Name"] == player]
+    score = calculate_performance(player_df)
+    performance_matrix.append({"Player": player, "Performance Score": score})
+
+performance_df = pd.DataFrame(performance_matrix)
+
+# -----------------------------
+# Step 5: Output Results
+# -----------------------------
+print("📊 Fielding Data:")
+print(df)
+print("\n🏏 Performance Matrix:")
+print(performance_df)
