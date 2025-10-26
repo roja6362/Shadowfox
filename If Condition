@@ -1,0 +1,65 @@
+1)# Program to determine BMI Category
+
+# Taking user input
+height = float(input("Enter height in meters: "))
+weight = float(input("Enter weight in kilograms: "))
+
+# Calculating BMI
+bmi = weight / (height ** 2)
+
+# Determining the category
+if bmi >= 30:
+    print("Obesity")
+elif bmi >= 25:
+    print("Overweight")
+elif bmi >= 18.5:
+    print("Normal")
+else:
+    print("Underweight")
+
+2)# Program to determine which country a city belongs to
+
+# Defining the lists of cities
+Australia = ["Sydney", "Melbourne", "Brisbane", "Perth"]
+UAE = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman"]
+India = ["Mumbai", "Bangalore", "Chennai", "Delhi"]
+
+# Asking the user for input
+city = input("Enter a city name: ")
+
+# Checking which country the city belongs to
+if city in Australia:
+    print(f"{city} is in Australia")
+elif city in UAE:
+    print(f"{city} is in UAE")
+elif city in India:
+    print(f"{city} is in India")
+else:
+    print(f"Sorry, {city} is not in the list")
+
+
+3)# Program to check if two cities belong to the same country
+
+# Defining the lists of cities
+Australia = ["Sydney", "Melbourne", "Brisbane", "Perth"]
+UAE = ["Dubai", "Abu Dhabi", "Sharjah", "Ajman"]
+India = ["Mumbai", "Bangalore", "Chennai", "Delhi"]
+
+# Asking the user for input
+city1 = input("Enter the first city: ")
+city2 = input("Enter the second city: ")
+
+# Function to find country of a city
+def find_country(city):
+    if city in Australia:
+        return "Australia"
+    elif city in UAE:
+        return "UAE"
+    elif city in India:
+        return "India"
+    else:
+        return None
+
+# Find countries
+country1 = find_country(city1)
+country2 = find_country(city2)
