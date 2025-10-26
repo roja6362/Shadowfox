@@ -1,0 +1,25 @@
+1)# Create a variable named pi and store 22/7 in it
+pi = 22 / 7
+
+# Print the value
+print("Value of pi:", pi)
+
+# Check the data type of pi
+print("Data type of pi:", type(pi))
+
+2)for_var = 4
+print(for_var)
+
+3)# Store values in variables
+principal = 10000   # Principal amount
+rate = 5            # Rate of interest (in %)
+time = 3            # Time in years
+
+# Calculate Simple Interest
+simple_interest = (principal * rate * time) / 100
+
+# Print result
+print("Principal:", principal)
+print("Rate of Interest:", rate)
+print("Time (years):", time)
+print("Simple Interest:", simple_interest)
