@@ -1,0 +1,18 @@
+import requests
+from bs4 import BeautifulSoup
+
+# URL to scrape
+url = "https://quotes.toscrape.com/"
+
+# Send HTTP request
+response = requests.get(url)
+
+# Parse HTML content
+soup = BeautifulSoup(response.text, "html.parser")
+
+# Extract quotes and authors
+for quote in soup.find_all("span", class_="text"):
+    print("Quote:", quote.get_text())
+
+for author in soup.find_all("small", class_="author"):
+    print("Author:", author.get_text())
