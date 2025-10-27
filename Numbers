@@ -10,30 +10,27 @@ print("Formatted result:", result)
 # identify the representation
 print("The representation used is octal.")
 
-2)def pond_water(radius):
-    pi = 3.14
-    # Step 1: Calculate area of the circular pond
-    area = pi * (radius ** 2)
-    
-    # Step 2: Calculate water volume (1.4 liters per square meter)
-    water = area * 1.4
-    
-    # Step 3: Print results (no decimals for water)
-    print("Pond Area:", area)
-    print("Total Water in Pond:", int(water), "liters")
+2)#In a village, there is a circular pond with a radius of 84 meters
+radius = 84 #in meters
+pi = 3.14
+water_per_sqm = 1.4 #liters per square meter
 
-# Call the function with radius = 84 meters
-pond_water(84)
+#calculate area of the pond
+area = pi*radius**2
 
-3)def calculate_speed(distance, time_minutes):
-    # convert minutes to seconds
-    time_seconds = time_minutes * 60
-    
-    # speed formula: Distance / Time
-    speed = distance / time_seconds
-    
-    # print without decimal (integer)
-    print("Speed:", int(speed), "m/s")
+#calculate total water (inliters)
+total_water = area * water_per_sqm
 
-# call the function with given values
-calculate_speed(490, 7)
+#print result without decimals
+print("Total water in the pond (liters):",int(total_water))
+
+3)#If you cross a 490meterlong street in 7 minutes
+distance = 490 #in meters
+time_minutes = 7
+time_seconds = time_minutes * 60 #convert to seconds
+
+#calculate speed in meters/second
+speed = distance / time_seconds
+
+#print speed without decimal point
+print("speed (m/s):",int(speed))
