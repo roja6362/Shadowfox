@@ -63,3 +63,12 @@ def find_country(city):
 # Find countries
 country1 = find_country(city1)
 country2 = find_country(city2)
+
+# Compare and print result
+if country1 and country2:
+    if country1 == country2:
+        print(f"Both cities are in {country1}")
+    else:
+        print("They don't belong to the same country")
+else:
+    print("One or both cities are not in the list")
